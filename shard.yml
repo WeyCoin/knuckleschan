@@ -1,0 +1,19 @@
+name: knuckleschan
+version: 0.1.0
+
+authors:
+  - acidtib <acidtib@protonmail.com>
+
+targets:
+  knuckleschan:
+    main: src/knuckleschan.cr
+
+crystal: 0.25.1
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  clear:
+    github: anykeyh/clear

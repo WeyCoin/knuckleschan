@@ -1,0 +1,14 @@
+/docs/
+/lib/
+/bin/
+/.shards/
+
+knuckleschan
+*.dwarf
+
+sentry
+dev/sentry*
+
+.DS_Store
+
+.env
