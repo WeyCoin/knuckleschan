@@ -1,3 +1,26 @@
-registration page,
+<!-- move this into a macro -->
+<script src="/js/register.js"></script>
 
-create mnemonic for user
+<div class="register">
+  <p>You dont need an email or a password at KnucklesChan, we generate a 96 bit Mnemonic,
+      thats represented as 9 random words.</p>
+
+  <p>This Mnemonic is created client side, that means the server never knows what your
+      secret 9 word seed says.
+  </p>
+
+  <div>
+    <label for="">Username</label>
+    <input type="text" class="username" placeholder="knuckles_lover_84">
+  </div>
+
+  <div>
+    <label for="">Seed</label>
+    <small>keep it secure and dont share it with anyone</small>
+    <div class="seed">
+      
+    </div>
+  </div>
+  
+  <button>Register</button>
+</div>

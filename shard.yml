@@ -17,3 +17,5 @@ dependencies:
     github: kemalcr/kemal
   clear:
     github: anykeyh/clear
+  dotenv:
+    github: gdotdesign/cr-dotenv
