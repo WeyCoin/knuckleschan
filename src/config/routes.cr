@@ -18,7 +18,7 @@ module KnucklesChan::Config
 
     # host/v1/
     module Api::V1
-      get "/api/auth/register" do |env|
+      post "/api/auth/register" do |env|
         KnucklesChan::Controller::Api::AuthController.new(env).register
       end
     end

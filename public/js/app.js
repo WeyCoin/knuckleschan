@@ -28,13 +28,10 @@ $(function() {
   }
 
   Chan.Validator.username = function(username) {
-    console.log(username)
-    console.log(Config.rules.username.length)
-    
     if (Config.rules.username.allow.test(username) || username.length < Config.rules.username.length) {
       console.log('Invalid username');
     } else {
-      console.log('Valid username');
+      Chan.Register.newUser()
     }
   }
 
