@@ -19,13 +19,19 @@ $(function() {
   }
 
   Chan.Register.newUser = function() {
-    $.post("http://localhost:3000/api/auth/register", { username: $('.username').val(), hex: Chan.Register.seedHex })
-      .done(function () {
+    $.ajax({
+      url: "http://localhost:3000/api/auth/register",
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({ username: $('.username').val(), hex: Chan.Register.seedHex }),
+      success: function() {
         console.log("success")
-      })
-      .fail(function () {
+      },
+      error: function() {
         console.log("error")
-      })
+      }
+    })
   }
   
   // get it started

@@ -3,6 +3,12 @@ module KnucklesChan::Controller
     def initialize(@env : HTTP::Server::Context) end
 
     def register
+      username = @env.params.json["username"].as(String)
+      hex = @env.params.json["hex"].as(String)
+
+      puts username
+      puts hex
+      
       {left: "up"}.to_json
     end
 
