@@ -6,6 +6,9 @@ module KnucklesChan::Controller
       username = @env.params.json["username"].as(String)
       hex = @env.params.json["hex"].as(String)
 
+      # TODO: validate uniquenes of username,
+      #       make sure hex has not been used before
+
       puts username
       puts hex
       

@@ -1,0 +1,13 @@
+display_name: knuckleschan
+
+info: true
+
+build: crystal build ./src/knuckleschan.cr -o knuckleschan
+
+run: ./knuckleschan
+
+run_args:
+
+watch:
+  - ./config/**/*.cr
+  - ./src/**/*.cr
