@@ -4,15 +4,24 @@ module KnucklesChan::Controller
 
     def register
       username = @env.params.json["username"].as(String)
-      hex = @env.params.json["hex"].as(String)
-
-      # TODO: validate uniquenes of username,
-      #       make sure hex has not been used before
+      password = @env.params.json["password"].as(String)
 
       puts username
-      puts hex
-      
-      {left: "up"}.to_json
+      puts password
+
+      begin
+        Clear::SQL.insert("users", 
+          {
+            username: username,
+            password: password
+          }).execute
+
+        {left: "up"}.to_json
+      rescue exception : PQ::PQError        
+        puts "[ERROR]: #{exception.message}"
+        # puts e.backtrace if ENV["KEMAL_ENV"] == "development"
+        Helper::Res.error("username already taken", 406) if exception.message == "duplicate key value violates unique constraint \"users_username\""
+      end
     end
 
     def login

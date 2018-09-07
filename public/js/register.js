@@ -3,13 +3,6 @@ $(function() {
 
   Chan.Register.main = function() {
     Chan.Register.eyes()
-
-    // pre gen a seed for user visiting registration page
-    Chan.Register.seed = Chan.createSeed()
-    Chan.Register.seedHex = Chan.seedToHex(Chan.Register.seed)
-    Chan.Register.seedWords = Chan.seedToWords(Chan.Register.seed)
-    
-    $(".seed").text(Chan.Register.seedWords)
   }
 
   Chan.Register.eyes = function() {
@@ -24,7 +17,7 @@ $(function() {
       type: "POST",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
-      data: JSON.stringify({ username: $('.username').val(), hex: Chan.Register.seedHex }),
+      data: JSON.stringify({ username: $('.username').val(), password: $('.password').val() }),
       success: function() {
         console.log("success")
       },

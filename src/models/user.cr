@@ -5,7 +5,11 @@ module KnucklesChan::Model
 
     with_serial_pkey
     column username : String
-    column hex : String
+    column hashed_password : String?
     timestamps
+
+    def password=(x)
+      self.encrypted_password = Encryptor.hash(x)
+    end
   end
 end

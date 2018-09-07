@@ -15,18 +15,6 @@ $(function() {
     
   }
 
-  Chan.createSeed = function(bit=96) {
-    return new Mnemonic(bit);
-  }
-
-  Chan.seedToHex = function(seed) {
-    return seed.toHex()
-  }
-
-  Chan.seedToWords = function(seed) {
-    return seed.toWords()
-  }
-
   Chan.Validator.username = function(username) {
     if (Config.rules.username.allow.test(username) || username.length < Config.rules.username.length) {
       console.log('Invalid username');
