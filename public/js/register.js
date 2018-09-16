@@ -17,9 +17,9 @@ $(function() {
       type: "POST",
       contentType: "application/json; charset=utf-8",
       dataType: "json",
-      data: JSON.stringify({ username: $('.username').val(), password: $('.password').val() }),
-      success: function() {
-        console.log("success")
+      data: JSON.stringify({ username: $('.username').val(), password: Chan.Password.hash($('.password').val()) }),
+      success: function(data) {
+        console.log(data)
       },
       error: function() {
         console.log("error")

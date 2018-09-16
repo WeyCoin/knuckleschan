@@ -1,6 +1,9 @@
 $(function() {
+  const bcrypt = dcodeIO.bcrypt;
+
   window.Chan = {}
   window.Chan.Validator = {}
+  window.Chan.Password = {}
 
   const Config = {
     rules: {
@@ -13,6 +16,10 @@ $(function() {
 
   Chan.main = function() {
     
+  }
+
+  Chan.Password.hash = function(password) {
+    return bcrypt.hashSync(password)
   }
 
   Chan.Validator.username = function(username) {

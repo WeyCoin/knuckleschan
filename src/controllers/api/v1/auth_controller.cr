@@ -6,17 +6,14 @@ module KnucklesChan::Controller
       username = @env.params.json["username"].as(String)
       password = @env.params.json["password"].as(String)
 
-      puts username
-      puts password
-
       begin
         Clear::SQL.insert("users", 
           {
             username: username,
-            password: password
+            hashed_password: password
           }).execute
 
-        {left: "up"}.to_json
+        Helper::Res.json()
       rescue exception : PQ::PQError        
         puts "[ERROR]: #{exception.message}"
         # puts e.backtrace if ENV["KEMAL_ENV"] == "development"
@@ -25,7 +22,24 @@ module KnucklesChan::Controller
     end
 
     def login
-      {left: "up"}.to_json
+      username = @env.params.json["username"].as(String)
+      password = @env.params.json["password"].as(String)
+      
+      tryUser = User.query.where({
+        username: username
+      }).first
+
+      if tryUser
+        hs_password = Crypto::Bcrypt::Password.new(tryUser.hashed_password)
+        
+        if hs_password == password
+          Helper::Res.json()
+        else
+          Helper::Res.json("incorrect password", 204)
+        end
+      else
+        Helper::Res.error("username not found", 402)
+      end
     end
   end
 end

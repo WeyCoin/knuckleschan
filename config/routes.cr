@@ -20,6 +20,10 @@ module KnucklesChan::Routes
     post "/api/auth/register" do |env|
       KnucklesChan::Controller::Api::AuthController.new(env).register
     end
+
+    post "/api/auth/login" do |env|
+      KnucklesChan::Controller::Api::AuthController.new(env).login
+    end
   end
 
   Kemal.config.env = ENV["KEMAL_ENV"]

@@ -1,6 +1,7 @@
 require "kemal"
 require "dotenv"
 require "clear"
+require "crypto/bcrypt/password"
 
 require "./initializers/env.cr"
 require "./initializers/**"
