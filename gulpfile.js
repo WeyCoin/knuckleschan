@@ -10,14 +10,14 @@ gulp.task('js', function(){
 
 gulp.task('sass', function () {
   return gulp
-    .src('src/assets/scss/**/*.scss')
+    .src('src/assets/sass/**/*.sass')
     .pipe(sass({ includePaths: ['styles'].concat(neat), indentedSyntax: true }))
     .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('watch', function() {
   gulp.watch('src/assets/js/*.js', ['js']);
-  gulp.watch('src/assets/scss/**/*.scss', ['sass']);
+  gulp.watch('src/assets/sass/**/*.sass', ['sass']);
 });
 
 gulp.task('default', function() {

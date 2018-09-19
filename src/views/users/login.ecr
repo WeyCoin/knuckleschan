@@ -1,16 +1,25 @@
 <!-- move this into a helper -->
 <script src="/js/login.js"></script>
 
-<div class="login">
-  <div>
-    <label for="">Username</label>
-    <input type="text" class="username" placeholder="">
-  </div>
+<div class="login" align="center">
 
-  <div>
-    <label for="">Password</label>
-    <input type="password" class="password" placeholder="">
-  </div>
+  <div class="form-signin">
+    <img src="/images/KnucklesChan_symbol_color.png" class="symbol">
 
-  <button class="login-user">Login</button>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="text" id="inputUsername" class="form-control username" placeholder="Username" required="" autofocus="">
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control password" placeholder="Password" required="">
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    
+    <button class="btn btn-lg btn-primary btn-block login-user" type="submit">Login</button>
+  </div>
+  
+  <a href="#" > Dont have an account? Please register here. </a> 
 </div>
