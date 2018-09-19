@@ -1,16 +1,24 @@
 <!-- move this into a helper -->
 <script src="/js/register.js"></script>
 
-<div class="register">
-  <div>
-    <label for="">Username</label>
-    <input type="text" class="username" placeholder="knuckles_lover_84">
-  </div>
+<div class="register" align="center">
 
-  <div>
-    <label for="">Password</label>
-    <input type="password" class="password" placeholder="">
-  </div>
+  <div class="form-signin">
+    <h3 class="form-signin-heading">Sign Up</h3> <hr>
 
-  <button class="register-user">Register</button>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="text" id="inputUsername" class="form-control username" placeholder="Username" required="" autofocus="">
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control password" placeholder="Password" required="">
+
+    <!-- <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div> -->
+    
+    <button class="btn btn-lg btn-primary btn-block register-user" type="submit">Join</button>
+  </div>
+  
 </div>

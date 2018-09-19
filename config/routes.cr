@@ -5,7 +5,7 @@ module KnucklesChan::Routes
     KnucklesChan::Controller::PageController.new(env).home
   end
 
-  get "/register" do |env|
+  get "/join" do |env|
     env.response.content_type = "text/html"
     KnucklesChan::Controller::UserController.new(env).register
   end
