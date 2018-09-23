@@ -28,6 +28,10 @@ shards:
     github: phoffer/inflector.cr
     version: 0.1.8
 
+  jwt:
+    github: crystal-community/jwt
+    version: 0.3.0
+
   kemal:
     github: kemalcr/kemal
     version: 0.24.0

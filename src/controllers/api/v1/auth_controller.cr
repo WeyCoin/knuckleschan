@@ -10,10 +10,14 @@ module KnucklesChan::Controller
         Clear::SQL.insert("users", 
           {
             username: username,
-            hashed_password: password
-          }).execute
+            hashed_password: Crypto::Bcrypt::Password.create(password, cost: 10).to_s
+          }
+        ).execute
 
-        Helper::Res.json()
+        payload = { "username" => username }
+        token = JWT.encode(payload, "SecretKey", "HS256")
+
+        Helper::Res.json({"token" => token})
       rescue exception : PQ::PQError        
         puts "[ERROR]: #{exception.message}"
         # puts e.backtrace if ENV["KEMAL_ENV"] == "development"
@@ -33,7 +37,10 @@ module KnucklesChan::Controller
         hs_password = Crypto::Bcrypt::Password.new(tryUser.hashed_password)
         
         if hs_password == password
-          Helper::Res.json()
+          payload = { "username" => tryUser.username }
+          token = JWT.encode(payload, "SecretKey", "HS256")
+
+          Helper::Res.json({"token" => token})
         else
           Helper::Res.json("incorrect password", 204)
         end
