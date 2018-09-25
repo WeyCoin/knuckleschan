@@ -4,11 +4,23 @@ TODO: Write a description here
 
 ## Installation
 
-TODO: Write installation instructions here
+copy `.env` file
+
+`cp .env-example .env`
+
+install dependencies
+
+`make install`
+
+run
+
+`make run`
+
+visit `http://localhost:3000`
 
 ## Usage
 
-TODO: Write usage instructions here
+NOTE: if working on the frontend you also ned to run `gulp`
 
 ## Development
 
