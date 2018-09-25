@@ -1,36 +1,33 @@
 module KnucklesChan::Routes
-  before_post "/api/*" do |env|
-    puts "Setting response content type"
-    env.response.content_type = "application/json"
-  end
+  public do
+    # host/
+    get "/" do |env|
+      env.response.content_type = "text/html" # move this is a helper method
+      KnucklesChan::Controller::PageController.new(env).home
+    end
 
-  # host/
-  get "/" do |env|
-    env.response.content_type = "text/html" # move this is a helper method
-    KnucklesChan::Controller::PageController.new(env).home
-  end
+    get "/join" do |env|
+      env.response.content_type = "text/html"
+      KnucklesChan::Controller::UserController.new(env).register
+    end
 
-  get "/join" do |env|
-    env.response.content_type = "text/html"
-    KnucklesChan::Controller::UserController.new(env).register
-  end
+    get "/login" do |env|
+      env.response.content_type = "text/html"
+      KnucklesChan::Controller::UserController.new(env).login
+    end
 
-  get "/login" do |env|
-    env.response.content_type = "text/html"
-    KnucklesChan::Controller::UserController.new(env).login
-  end
-
-  # host/v1/
-  module Api::V1
-    post "/api/auth/register" do |env|
+    post "/auth/register" do |env|
       KnucklesChan::Controller::Api::AuthController.new(env).register
     end
 
-    post "/api/auth/login" do |env|
+    post "/auth/login" do |env|
       KnucklesChan::Controller::Api::AuthController.new(env).login
     end
+  end
 
-    post "/api/feed" do |env|
+  api("v1") do
+    # host/v1/
+    post "/feed" do |env|
       KnucklesChan::Controller::Api::FeedController.new(env).main
     end
   end

@@ -8,7 +8,7 @@ targets:
   knuckleschan:
     main: src/knuckleschan.cr
 
-crystal: 0.25.1
+crystal: 0.26.1
 
 license: MIT
 
@@ -22,3 +22,6 @@ dependencies:
     github: gdotdesign/cr-dotenv
   jwt:
     github: crystal-community/jwt
+  kave:
+    git: https://github.com/jwoertink/kave.git
+    branch: master

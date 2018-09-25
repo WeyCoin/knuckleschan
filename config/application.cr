@@ -1,5 +1,6 @@
 require "kemal"
 require "dotenv"
+require "kave"
 require "clear"
 require "crypto/bcrypt/password"
 require "jwt"
@@ -15,4 +16,5 @@ require "./db/**"
 module KnucklesChan::Application
   # run migrations if needed
   Clear::Migration::Manager.instance.apply_all
+
 end

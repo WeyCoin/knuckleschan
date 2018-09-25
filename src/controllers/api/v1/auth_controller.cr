@@ -14,7 +14,7 @@ module KnucklesChan::Controller
           }
         ).execute
 
-        payload = { "username" => username }
+        payload = { "username" => username, "iat" => Time.now.epoch }
         token = JWT.encode(payload, "SecretKey", "HS256")
 
         Helper::Res.json({"token" => token})
@@ -37,7 +37,7 @@ module KnucklesChan::Controller
         hs_password = Crypto::Bcrypt::Password.new(tryUser.hashed_password)
         
         if hs_password == password
-          payload = { "username" => tryUser.username }
+          payload = { "username" => tryUser.username, "iat" => Time.now.epoch }
           token = JWT.encode(payload, "SecretKey", "HS256")
 
           Helper::Res.json({"token" => token})

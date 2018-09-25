@@ -32,6 +32,10 @@ shards:
     github: crystal-community/jwt
     version: 0.3.0
 
+  kave:
+    git: https://github.com/jwoertink/kave.git
+    commit: c1b0d31b7860ac00a4edc9f9fcacf8e50b72ee27
+
   kemal:
     github: kemalcr/kemal
     version: 0.24.0
