@@ -2,7 +2,7 @@ module KnucklesChan::Helper
   class KaveToken < Kave::AuthToken
     def self.locate(token : String)
       begin
-        payload, header = JWT.decode(token, "SecretKey", "HS256")
+        payload, header = KnucklesChan::Helper::Jwt.decode(token)
         
         tryUser = User.query.where({
           uuid: payload["sub"],

@@ -16,13 +16,7 @@ module KnucklesChan::Controller
           }
         ).execute
 
-        payload = { 
-          "sub" => uuid, 
-          "username" => username, 
-          "iat" => Time.now.epoch, 
-          "exp" => 14.days.from_now.epoch 
-        }
-        token = JWT.encode(payload, "SecretKey", "HS256")
+        token = KnucklesChan::Helper::Jwt.encode(uuid, username)
 
         Helper::Res.json({"uuid" => uuid, "token" => token})
       rescue exception : PQ::PQError        
@@ -48,13 +42,7 @@ module KnucklesChan::Controller
         hs_password = Crypto::Bcrypt::Password.new(tryUser.hashed_password)
         
         if hs_password == password
-          payload = { 
-            "sub" => tryUser.uuid, 
-            "username" => tryUser.username, 
-            "iat" => Time.now.epoch, 
-            "exp" => 14.days.from_now.epoch 
-          }
-          token = JWT.encode(payload, "SecretKey", "HS256")
+          token = KnucklesChan::Helper::Jwt.encode(tryUser.uuid, tryUser.username)
 
           Helper::Res.json({"uuid" => tryUser.uuid, "token" => token})
         else
