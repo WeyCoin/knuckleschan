@@ -10,11 +10,10 @@ module KnucklesChan
     column hashed_password : String
     timestamps
 
-    def self.current_user(token : String)
-      payload, header = KnucklesChan::Helper::Jwt.decode(token)
+    def self.current_user(payload)
       return User.query.where({
         uuid: payload["uuid"],
-        username: payload["username"]
+        nonce: payload["aud"][0]
       }).first
     end
   end

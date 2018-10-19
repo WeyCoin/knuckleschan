@@ -20,7 +20,10 @@ module KnucklesChan::Controller
 
         token = KnucklesChan::Helper::Jwt.encode(uuid, nonce)
 
-        Helper::Res.json({"uuid" => uuid, "token" => token})
+        Helper::Res.json({
+          "token" => token,
+          "username" => username
+        })
       rescue exception : PQ::PQError        
         puts "[ERROR]: #{exception.message}"
         # puts e.backtrace if ENV["KEMAL_ENV"] == "development"
@@ -48,7 +51,10 @@ module KnucklesChan::Controller
           # if nonce is missing
           token = KnucklesChan::Helper::Jwt.encode(tryUser.uuid, tryUser.nonce)
 
-          Helper::Res.json({"uuid" => tryUser.uuid, "token" => token})
+          Helper::Res.json({
+            "token" => token,
+            "username" => tryUser.username
+          })
         else
           Helper::Res.json("incorrect password", 204)
         end

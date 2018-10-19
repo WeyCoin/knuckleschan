@@ -2,8 +2,9 @@ module KnucklesChan::Helper
   class KaveToken < Kave::AuthToken
     def self.locate(token : String)
       begin
-        if tryUser = User.current_user(token)
-          # TODO: make sure its not expired
+        payload, header = KnucklesChan::Helper::Jwt.decode(token)
+        
+        if tryUser = User.current_user(payload)
           return true
         else
           return false
