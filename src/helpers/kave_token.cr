@@ -4,10 +4,16 @@ module KnucklesChan::Helper
       begin
         payload, header = JWT.decode(token, "SecretKey", "HS256")
         
-        puts payload
-        puts header
+        tryUser = User.query.where({
+          uuid: payload["sub"],
+          username: payload["username"]
+        }).first
 
-        return true
+        if tryUser
+          return true
+        else
+          return false
+        end
       rescue exception : JWT::VerificationError
         return false
       end

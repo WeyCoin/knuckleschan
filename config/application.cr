@@ -4,6 +4,7 @@ require "kave"
 require "clear"
 require "crypto/bcrypt/password"
 require "jwt"
+require "json"
 
 require "./initializers/env.cr"
 require "./initializers/**"

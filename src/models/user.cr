@@ -5,6 +5,7 @@ module KnucklesChan
 
     with_serial_pkey
     column username : String
+    column uuid : String
     column hashed_password : String
     timestamps
   end
