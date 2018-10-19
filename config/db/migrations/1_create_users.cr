@@ -7,7 +7,7 @@ module KnucklesChan
         t.string "uuid", unique: true, null: false
         t.string "username", unique: true, null: false
         t.string "hashed_password", null: false
-        t.string "nonce"
+        t.string "nonce", null: false
         t.timestamps
       end
     end

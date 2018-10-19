@@ -1,7 +1,6 @@
 module KnucklesChan::Helper
   class Jwt
     def self.encode(uuid : String, nonce : String)
-      # TODO: implement jti
       payload = {
         "iss" => "WAE",
         "uuid" => uuid, 

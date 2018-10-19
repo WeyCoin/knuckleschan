@@ -11,10 +11,10 @@ module KnucklesChan
     timestamps
 
     def self.current_user(payload)
-      return User.query.where({
+      return User.query.find({
         uuid: payload["uuid"],
         nonce: payload["aud"][0]
-      }).first
+      })
     end
   end
 end

@@ -39,17 +39,16 @@ module KnucklesChan::Controller
       username = @env.params.json["username"].as(String)
       password = @env.params.json["password"].as(String)
       
-      tryUser = User.query.where({
-        username: username
-      }).first
+      tryUser = User.query.find!({username: username})
 
       if tryUser
         hs_password = Crypto::Bcrypt::Password.new(tryUser.hashed_password)
         
         if hs_password == password
-          # TODO: create user nonce and update database
-          # if nonce is missing
-          token = KnucklesChan::Helper::Jwt.encode(tryUser.uuid, tryUser.nonce)
+          new_nounce = Random::Secure.hex(10)
+          Clear::SQL.update("users").set({"nonce" => new_nounce}).where{id == tryUser.id }.execute
+
+          token = KnucklesChan::Helper::Jwt.encode(tryUser.uuid, new_nounce)
 
           Helper::Res.json({
             "token" => token,
