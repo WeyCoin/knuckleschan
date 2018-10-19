@@ -6,17 +6,19 @@ module KnucklesChan::Controller
       begin
         username = @env.params.json["username"].as(String)
         password = @env.params.json["password"].as(String)
-        uuid = [Random::Secure.hex(8), Random::Secure.hex(4), Random::Secure.hex(4), Random::Secure.hex(4), Random::Secure.hex(8)].join("-").downcase
+        uuid = [Random::Secure.hex(8), Random::Secure.hex(4), Random::Secure.hex(4), Random::Secure.hex(4), Random::Secure.hex(8)].join("-")
+        nonce = Random::Secure.hex(10)
 
         Clear::SQL.insert("users", 
           {
             uuid: uuid,
+            nonce: nonce,
             username: username,
             hashed_password: Crypto::Bcrypt::Password.create(password, cost: 10).to_s
           }
         ).execute
 
-        token = KnucklesChan::Helper::Jwt.encode(uuid, username)
+        token = KnucklesChan::Helper::Jwt.encode(uuid, nonce)
 
         Helper::Res.json({"uuid" => uuid, "token" => token})
       rescue exception : PQ::PQError        
@@ -42,7 +44,9 @@ module KnucklesChan::Controller
         hs_password = Crypto::Bcrypt::Password.new(tryUser.hashed_password)
         
         if hs_password == password
-          token = KnucklesChan::Helper::Jwt.encode(tryUser.uuid, tryUser.username)
+          # TODO: create user nonce and update database
+          # if nonce is missing
+          token = KnucklesChan::Helper::Jwt.encode(tryUser.uuid, tryUser.nonce)
 
           Helper::Res.json({"uuid" => tryUser.uuid, "token" => token})
         else
@@ -51,6 +55,10 @@ module KnucklesChan::Controller
       else
         Helper::Res.error("username not found", 402)
       end
+    end
+
+    def logout
+      
     end
   end
 end

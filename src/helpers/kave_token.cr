@@ -10,6 +10,8 @@ module KnucklesChan::Helper
         end
       rescue exception : JWT::VerificationError
         return false
+      rescue exception : JWT::ExpiredSignatureError
+        return false
       end
     end
   end
