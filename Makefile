@@ -10,10 +10,7 @@ rebuild-sentry:
 shards:
 	shards install
 
-npm:
-	npm install
-
-install: shards rebuild-sentry npm
+install: shards rebuild-sentry
 
 build:
 	crystal build -o knuckleschan ./src/knuckleschan.cr
