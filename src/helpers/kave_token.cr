@@ -2,14 +2,7 @@ module KnucklesChan::Helper
   class KaveToken < Kave::AuthToken
     def self.locate(token : String)
       begin
-        payload, header = KnucklesChan::Helper::Jwt.decode(token)
-        
-        tryUser = User.query.where({
-          uuid: payload["sub"],
-          username: payload["username"]
-        }).first
-
-        if tryUser
+        if tryUser = User.current_user(token)
           return true
         else
           return false
